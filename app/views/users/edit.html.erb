@@ -1,0 +1,26 @@
+<h1>Edit User</h1>
+
+<%= form_with model: @user, local: true do |f| %>
+  <% if @user.errors.any? %>
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this User from being edited:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <p>
+    <%= f.label :username, 'Username: '%></br>
+    <%= f.text_field :username, placeholder: "Your nik name" %>
+  </p>
+  <p>
+    <%= f.label :email, 'Email: '%></br>    
+    <%= f.email_field :email, placeholder: "example@example.com" %> 
+  </p>
+  <p>
+    <%= f.label :password, 'Password: '%></br>   
+    <%= f.password_field :password %>
+  </p>
+
+  <%= f.submit %>
+<% end %>

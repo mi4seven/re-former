@@ -1,8 +1,8 @@
 <h1>New User</h1>
 
-<form action="/users" method="post" accept-charset="UTF-8">
+<!-- <form action="/users" method="post" accept-charset="UTF-8">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <p>
+<p>
     <label for="username">Username: </label>
     <input type="text" name="user[username]">
   </p>
@@ -15,4 +15,51 @@
     <input type="password" name="user[password]">
   </p>
   <input type="submit" value="New User">
-</form>
+</form>-->
+
+<!--
+<%= form_tag('/users') do %>
+  <p>
+    <%= label_tag 'username' %>
+    <%= text_field_tag 'username' %><br>
+  </p>
+  <p>
+    <%= label_tag 'email' %>
+    <%= email_field_tag 'email' %><br>
+  </p>
+  <p>
+    <%= label_tag 'password' %>
+    <%= password_field_tag 'password' %><br>
+  </p>
+  <%= submit_tag 'New User' %>
+<% end %>-->
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this User from being created:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <p>
+    <%= f.label :username %></br>      
+    <%= f.text_field :username %> 
+    <%= @user.errors[:username].first if @user.errors[:username].any? %> 
+  </p>    
+  <p>
+    <%= f.label :email %></br>      
+    <%= f.email_field :email %>
+    <%= @user.errors[:email].first if @user.errors[:email].any? %>         
+  </p>    
+  <p>
+    <%= f.label :password %></br>    
+    <%= f.password_field :password %> 
+    <%= @user.errors[:password].first if @user.errors[:password].any? %>     
+  </p>  
+  
+    <%= f.submit %>
+<% end %>
+
